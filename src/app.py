@@ -3,6 +3,9 @@ from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
+from langchain_community.chat_models import ChatOpenAI
+from langchain.chains import ConversationalRetrievalChain
+from langchain.memory import ConversationBufferMemory
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -31,6 +34,17 @@ def get_vectorstore(text_chunks):
     vectorstore = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
     return vectorstore
 
+def get_conversation_chain(vectorstore):
+    llm = ChatOpenAI()
+
+    memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+    conversation_chain = ConversationalRetrievalChain.from_llm(
+        llm=llm,
+        retriever=vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 5}),
+        memory=memory,
+    )
+    return conversation_chain
+
 if __name__ == "__main__":
     # Ensure the file exists
     if not os.path.exists(pdf_file_name):
@@ -52,3 +66,5 @@ if __name__ == "__main__":
         # Step 3: Generate and save vector embeddings
         vectorstore = get_vectorstore(text_chunks)
         print("\nVectorstore created successfully!")
+
+        conversation_chain = get_conversation_chain(vectorstore)
