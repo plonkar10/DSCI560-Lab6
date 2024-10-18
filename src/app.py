@@ -102,26 +102,3 @@ def build_interface():
 if __name__ == "__main__":
 
     build_interface()
-
-    # Ensure the file exists
-    # if not os.path.exists(pdf_file_name):
-    #     print(f"PDF file '{pdf_file_name}' not found in the directory.")
-    # else:
-    #     # Load the PDF file into a list (in case you want to load multiple PDFs)
-    #     pdf_docs = [pdf_file_name]
-        
-    #     # Step 1: Extract text from the PDF
-    #     pdf_text = get_pdf_text(pdf_docs)
-    #     print("\nPDF Text Extracted:")
-    #     print(pdf_text[:1000])  # Printing first 1000 characters to avoid flooding output
-        
-    #     # Step 2: Split the text into chunks
-    #     text_chunks = get_text_chunks(pdf_text)
-    #     print("\nNumber of Text Chunks:", len(text_chunks))
-    #     print("First Text Chunk:", text_chunks[0])
-        
-    #     # Step 3: Generate and save vector embeddings
-    #     vectorstore = get_vectorstore(text_chunks)
-    #     print("\nVectorstore created successfully!")
-
-    #     conversation_chain = get_conversation_chain(vectorstore)
