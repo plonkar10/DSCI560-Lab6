@@ -1,4 +1,4 @@
-# PDF Conversational AI Chatbot GPT 3.5
+# DocuBot: PDF Conversational AI Chatbot GPT 3.5
 This is a Python GUI application that demonstrates how to build a custom PDF chatbot using LangChain and GPT 3.5 
 
 ## Features
